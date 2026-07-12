@@ -18,6 +18,195 @@ The experiments focus on the basic input/output peripherals and communication in
 | 📺 OLED Display | Interface an SSD1306 OLED display using the I²C communication protocol and display text. |
 
 ---
+# ESP32-S3 Troubleshooting Guide
+
+A collection of common issues and solutions encountered while developing ESP32-S3 projects using **PlatformIO** and **Wokwi**.
+
+---
+
+## 📌 Common Issues and Solutions
+
+### 1. Select the Correct Board
+
+When creating a new PlatformIO project, always select the correct board.
+
+For ESP32-S3 projects, use:
+
+```ini
+esp32-s3-devkitc-1
+```
+
+Selecting the wrong board can lead to:
+- Compilation errors
+- Incorrect pin mapping
+- Peripheral incompatibility
+- Simulation failures
+
+---
+
+### 2. Add `diagram.json`
+
+If you are using the **Wokwi Community License**, create a file named:
+
+```text
+diagram.json
+```
+
+Copy the JSON configuration from the Wokwi website and paste it into this file.
+
+---
+
+### 3. Configure `wokwi.toml`
+
+Create a file named:
+
+```text
+wokwi.toml
+```
+
+Example:
+
+```toml
+[wokwi]
+version = 1
+firmware = ".pio/build/esp32-s3-devkitc-1/firmware.bin"
+elf = ".pio/build/esp32-s3-devkitc-1/firmware.elf"
+```
+
+Ensure the firmware and ELF paths are correct.
+
+---
+
+### 4. Verify Firmware and ELF Paths
+
+If the simulation does not start:
+
+- Verify `firmware.bin` exists.
+- Verify `firmware.elf` exists.
+- Ensure both paths match your build directory.
+
+---
+
+### 5. Use Forward Slashes (`/`)
+
+When copying file paths from Windows, replace backslashes (`\`) with forward slashes (`/`).
+
+❌ Incorrect
+
+```text
+.pio\build\esp32-s3-devkitc-1\firmware.bin
+```
+
+✅ Correct
+
+```text
+.pio/build/esp32-s3-devkitc-1/firmware.bin
+```
+
+---
+
+### 6. Check `platformio.ini`
+
+Ensure the board matches the one selected when creating the project.
+
+```ini
+[env:esp32-s3-devkitc-1]
+platform = espressif32
+board = esp32-s3-devkitc-1
+framework = arduino
+```
+
+---
+
+### 7. Install Required Libraries
+
+If your project uses external libraries, include them in `platformio.ini`.
+
+```ini
+lib_deps =
+    adafruit/Adafruit GFX Library@^1.12.6
+    adafruit/Adafruit SSD1306@^2.5.17
+```
+
+Missing libraries will cause compilation errors.
+
+---
+
+### 8. Use `INPUT_PULLUP` for Push Buttons
+
+Instead of:
+
+```cpp
+pinMode(buttonPin, INPUT);
+```
+
+Use:
+
+```cpp
+pinMode(buttonPin, INPUT_PULLUP);
+```
+
+This prevents floating inputs and removes the need for an external pull-up resistor in most cases.
+
+---
+
+### 9. Use Hardware PWM
+
+Do **not** use:
+
+```cpp
+analogWrite(pin, value);
+```
+
+Instead, use the ESP32 LEDC hardware PWM API.
+
+---
+
+### 10. Configure PWM Correctly
+
+Always configure the PWM channel before attaching it to a pin.
+
+```cpp
+ledcSetup(channel, frequency, resolution);
+ledcAttachPin(pin, channel);
+ledcWrite(channel, dutyCycle);
+```
+
+Do **not** call `ledcAttachPin()` before `ledcSetup()`.
+
+---
+
+### 11. Initialize Serial Communication
+
+If using the Serial Monitor, always initialize Serial.
+
+```cpp
+Serial.begin(115200);
+```
+
+Make sure the Serial Monitor uses the same baud rate.
+
+---
+
+## ✅ Troubleshooting Checklist
+
+- ✅ Selected the correct board (`esp32-s3-devkitc-1`)
+- ✅ Added `diagram.json`
+- ✅ Created `wokwi.toml`
+- ✅ Verified firmware and ELF paths
+- ✅ Used forward slashes (`/`) in file paths
+- ✅ Checked `platformio.ini`
+- ✅ Installed required libraries
+- ✅ Used `INPUT_PULLUP` for push buttons
+- ✅ Used hardware PWM instead of `analogWrite()`
+- ✅ Called `ledcSetup()` before `ledcAttachPin()`
+- ✅ Initialized Serial using `Serial.begin(115200)`
+
+---
+
+## 🤝 Contributing
+
+Found another common issue? Feel free to open an issue or submit a pull request to help improve this guide.
 
 ## 🎯 Learning Objectives
 
