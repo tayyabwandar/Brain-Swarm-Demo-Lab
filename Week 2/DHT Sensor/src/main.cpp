@@ -2,7 +2,7 @@
 #include<DHT.h>
 #define DHTTYPE DHT22
 
-#define dhtpin 4
+#define dhtpin 11
 
 
 DHT dhtSensor(dhtpin,DHTTYPE);
@@ -33,7 +33,7 @@ Serial.println(humidity);
 Serial.println("----------------");
 Serial.println("The Temperature is:");
 Serial.println(Temperature);
-delay(300);
+delay(2000);
 
 
 }
