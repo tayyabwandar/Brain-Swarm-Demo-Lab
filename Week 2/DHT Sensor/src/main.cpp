@@ -12,12 +12,13 @@ void setup(){
   Serial.begin(115200);
   dhtSensor.begin();
   Serial.println("The The Humidity and the Temperature is Sensor is started");
-  delay(300);
+  delay(2000);
 }
 
 void loop(){
      float humidity = dhtSensor.readHumidity();
      float Temperature = dhtSensor.readTemperature();
+
    
      if(isnan(humidity)){
         if(isnan(Temperature)){
