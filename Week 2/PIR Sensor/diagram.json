@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "author": "Muhammad Tayyab",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-s3-devkitc-1", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-pir-motion-sensor", "id": "pir1", "top": 13.6, "left": -132.18, "attrs": {} }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "pir1:VCC", "esp:3V3.1", "red", [ "v38.4", "h76.8", "v-115.2" ] ],
+    [ "pir1:GND", "esp:GND.1", "black", [ "v0" ] ],
+    [ "pir1:OUT", "esp:4", "green", [ "v67.2", "h57.46", "v-115.2" ] ]
+  ],
+  "dependencies": {}
+}
