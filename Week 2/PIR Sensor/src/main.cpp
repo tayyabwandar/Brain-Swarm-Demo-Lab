@@ -17,5 +17,5 @@ void loop(){
   else{
 Serial.println("There is no motion!");
   }
-
+delay(2000);
 }
