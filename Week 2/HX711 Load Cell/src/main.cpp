@@ -1,28 +1,26 @@
 #include <Arduino.h>
-#include<HX711.h>
-
+#include <HX711.h>
 
 #define data 15
-#define clock 8
+#define clock 6
 
 HX711 loadcell;
 
-float calibratedfactor =-7000;
+float calibratedfactor = 1000.51;
 
+void setup()
+{
 
-
-void setup(){
-
-Serial.begin(115200);
-loadcell.begin(data,clock);
-Serial.println("Sensor Started!");
-loadcell.set_scale(calibratedfactor);
-loadcell.tare();
+  Serial.begin(115200);
+  loadcell.begin(data, clock);
+  Serial.println("Sensor Started!");
+  loadcell.set_scale(calibratedfactor);
+  loadcell.tare();
 }
-void loop(){
-   Serial.println("Weight:");
-   Serial.print(loadcell.get_units(),2);
-Serial.println("g");
-delay(2000);
-
+void loop()
+{
+  Serial.println("Weight:");
+  Serial.print(loadcell.get_units(), 2);
+  Serial.println("Kg");
+  delay(2000);
 }
