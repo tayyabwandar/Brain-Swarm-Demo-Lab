@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "author": "Muhammad Tayyab",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-s3-devkitc-1", "id": "esp", "top": -19.38, "left": 81.37, "attrs": {} },
+    {
+      "type": "wokwi-hx711",
+      "id": "cell1",
+      "top": 98.6,
+      "left": -122.2,
+      "attrs": { "type": "5kg" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "esp:GND.1", "cell1:GND", "black", [ "h-220.85", "v-86.4" ] ],
+    [ "cell1:DT", "esp:15", "green", [ "h-38.4", "v-58.1" ] ],
+    [ "esp:6", "cell1:SCK", "green", [ "h-230.45", "v86.4" ] ],
+    [ "cell1:VCC", "esp:3V3.1", "red", [ "h-48", "v-153.6" ] ]
+  ],
+  "dependencies": {}
+}
