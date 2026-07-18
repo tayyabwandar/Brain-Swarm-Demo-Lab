@@ -8,8 +8,8 @@ void setup()
 
   Serial.begin(115200);
   Serial.println("Sensor Started!");
-  pinMode(trig, INPUT);
-  pinMode(Echo, OUTPUT);
+  pinMode(trig, OUTPUT);
+  pinMode(Echo, INPUT);
 }
 void loop()
 {
