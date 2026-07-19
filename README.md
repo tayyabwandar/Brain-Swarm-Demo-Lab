@@ -18,6 +18,84 @@ The experiments focus on the basic input/output peripherals and communication in
 | 📺 OLED Display | Interface an SSD1306 OLED display using the I²C communication protocol and display text. |
 
 ---
+# Week 2 – Sensor Interfacing
+
+Week 2 focuses on interfacing commonly used sensors with the **ESP32-S3**. These projects introduce analog, digital, and I²C-based sensors, providing hands-on experience in acquiring real-world data for embedded systems and IoT applications.
+
+---
+
+## 📚 Projects Covered
+
+| Project | Description |
+|---------|-------------|
+| 🌡️ DHT22 | Measure temperature and humidity using a digital sensor. |
+| ⚖️ HX711 Load Cell | Read weight measurements using a load cell amplifier. |
+| 🚶 PIR Motion Sensor | Detect human motion using passive infrared sensing. |
+| ☀️ LDR Sensor | Measure ambient light intensity using analog and digital outputs. |
+| 🎮 Analog Joystick | Read X-axis, Y-axis, and push button inputs. |
+| 📐 MPU6050 | Measure acceleration and angular velocity using a 6-axis IMU over I²C. |
+| 📏 HC-SR04 Ultrasonic | Measure object distance using ultrasonic sound waves. |
+
+---
+
+## 🎯 Learning Objectives
+
+By completing Week 2, you will learn how to:
+
+- Interface analog, digital, and I²C sensors
+- Read environmental and motion data
+- Measure distance, light intensity, and weight
+- Acquire accelerometer and gyroscope data
+- Process sensor outputs using the ESP32-S3
+- Debug sensor communication and calibration
+- Build a foundation for robotics and IoT applications
+
+---
+
+## 🛠 Software Used
+
+- Visual Studio Code
+- PlatformIO IDE
+- Wokwi Simulator
+- Arduino Framework
+
+---
+
+## 📂 Folder Structure
+
+```text
+Week 2/
+├── DHT22/
+├── HX711 Load Cell/
+├── PIR Motion Sensor/
+├── LDR Sensor/
+├── Analog Joystick/
+├── MPU6050/
+├── HC-SR04 Ultrasonic/
+└── README.md
+```
+
+Each project includes:
+
+- Source code (`src/main.cpp`)
+- Circuit diagram (`diagram.json`)
+- PlatformIO configuration (`platformio.ini`)
+- Wokwi configuration (`wokwi.toml`)
+- Project documentation (`README.md`)
+
+---
+
+## 📌 Week 2 Summary
+
+This week builds on the ESP32 fundamentals by introducing sensor interfacing techniques. The projects cover digital, analog, and I²C communication while demonstrating how to collect and process real-world data for embedded systems, robotics, and IoT applications.
+
+---
+
+## 👨‍💻 Author
+
+**Muhammad Tayyab**  
+Computer Engineering Student  
+University of Engineering and Technology Taxila
 # ESP32-S3 Troubleshooting Guide
 
 A collection of common issues and solutions encountered while developing ESP32-S3 projects using **PlatformIO** and **Wokwi**.
