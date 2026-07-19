@@ -18,7 +18,13 @@ void loop() {
   int analogValue = analogRead(analogPin);
 
   Serial.print("Digital = ");
-  Serial.print(digitalState);
+  Serial.println(digitalState);
+  if(digitalState==LOW){
+    Serial.println("Bright");
+  }
+  else{
+    Serial.println("Dark");
+  }
 
   Serial.print("   Analog = ");
   Serial.println(analogValue);
