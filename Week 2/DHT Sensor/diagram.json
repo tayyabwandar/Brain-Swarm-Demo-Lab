@@ -10,6 +10,13 @@
       "top": -18.9,
       "left": -34.2,
       "attrs": { "temperature": "2.3", "humidity": "73" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 176.75,
+      "left": -67.2,
+      "attrs": { "value": "10000" }
     }
   ],
   "connections": [
@@ -17,7 +24,9 @@
     [ "esp:RX", "$serialMonitor:TX", "", [] ],
     [ "dht1:GND", "esp:GND.1", "black", [ "v0" ] ],
     [ "dht1:VCC", "esp:3V3.1", "red", [ "v48", "h96", "v-105.6" ] ],
-    [ "dht1:SDA", "esp:11", "green", [ "v19.2", "h0.1", "v0", "h0", "v0", "h105.6", "v201.6" ] ]
+    [ "dht1:SDA", "esp:11", "green", [ "v19.2", "h0.1", "v0", "h0", "v0", "h105.6", "v201.6" ] ],
+    [ "dht1:VCC", "r1:1", "red", [ "v0", "h-105.6", "v9.6", "h9.6", "v76.8", "h9.6" ] ],
+    [ "r1:2", "dht1:SDA", "green", [ "v0", "h56.4", "v-67.2" ] ]
   ],
   "dependencies": {}
 }
