@@ -52,14 +52,7 @@ By completing Week 2, you will learn how to:
 
 ---
 
-## 🛠 Software Used
 
-- Visual Studio Code
-- PlatformIO IDE
-- Wokwi Simulator
-- Arduino Framework
-
----
 
 ## 📂 Folder Structure
 
@@ -75,28 +68,7 @@ Week 2/
 └── README.md
 ```
 
-Each project includes:
-
-- Source code (`src/main.cpp`)
-- Circuit diagram (`diagram.json`)
-- PlatformIO configuration (`platformio.ini`)
-- Wokwi configuration (`wokwi.toml`)
-- Project documentation (`README.md`)
-
----
-
-## 📌 Week 2 Summary
-
-This week builds on the ESP32 fundamentals by introducing sensor interfacing techniques. The projects cover digital, analog, and I²C communication while demonstrating how to collect and process real-world data for embedded systems, robotics, and IoT applications.
-
----
-
-## 👨‍💻 Author
-
-**Muhammad Tayyab**  
-Computer Engineering Student  
-University of Engineering and Technology Taxila
-# ESP32-S3 Troubleshooting Guide
+E
 
 A collection of common issues and solutions encountered while developing ESP32-S3 projects using **PlatformIO** and **Wokwi**.
 
