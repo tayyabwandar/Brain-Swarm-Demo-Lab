@@ -1,12 +1,12 @@
-# LDR Light Sensor
+# PIR Motion Sensor
 
 
 
 # Overview
 
-This project demonstrates how to interface an **LDR (Light Dependent Resistor) Sensor Module** with an **ESP32-S3**.
+This project demonstrates how to interface a **PIR (Passive Infrared) Motion Sensor** with an **ESP32-S3** using the Arduino framework.
 
-The LDR changes its resistance according to the intensity of light. The sensor module provides both analog and digital outputs, allowing the ESP32 to measure light intensity or detect whether the environment is bright or dark.
+The PIR sensor detects motion by sensing changes in infrared radiation emitted by humans and animals. Whenever motion is detected, the sensor outputs a HIGH digital signal that the ESP32 reads and displays on the Serial Monitor.
 
 This project is part of **Week 2** of the **Brain-Swarm-Lab** embedded systems learning roadmap.
 
@@ -14,11 +14,11 @@ This project is part of **Week 2** of the **Brain-Swarm-Lab** embedded systems l
 
 # Learning Objectives
 
-- Understand LDR working principle
-- Read analog values using ADC
-- Read digital threshold output
-- Interface LDR with ESP32-S3
-- Monitor ambient light intensity
+- Understand Passive Infrared sensing
+- Interface PIR sensor with ESP32-S3
+- Read digital input signals
+- Detect human motion
+- Display motion status using Serial Monitor
 
 ---
 
@@ -27,7 +27,7 @@ This project is part of **Week 2** of the **Brain-Swarm-Lab** embedded systems l
 | Component | Quantity |
 |-----------|----------|
 | ESP32-S3 Development Board | 1 |
-| LDR Sensor Module | 1 |
+| PIR Motion Sensor (HC-SR501) | 1 |
 | Breadboard | 1 |
 | Jumper Wires | As Required |
 
@@ -35,38 +35,36 @@ This project is part of **Week 2** of the **Brain-Swarm-Lab** embedded systems l
 
 # Wiring Diagram
 
-| LDR Pin | ESP32-S3 |
+| PIR Pin | ESP32-S3 |
 |----------|----------|
-| VCC | 3.3V |
+| VCC | 5V (or 3.3V if supported) |
+| OUT | GPIO 4 |
 | GND | GND |
-| AO | GPIO 4 |
-| DO | GPIO 5 |
 
 ---
 
 # Pin Configuration
 
 ```cpp
-#define ANALOG_PIN 4
-#define DIGITAL_PIN 5
+#define PIR_PIN 4
 ```
 
 ---
 
 # Features
 
-- Reads analog light intensity
-- Detects bright and dark conditions
-- Adjustable sensitivity
-- Simple interface
-- Suitable for IoT projects
+- Detects human motion
+- Digital HIGH/LOW output
+- Low power consumption
+- Easy to interface
+- Suitable for security systems
 
 ---
 
 # Project Structure
 
 ```
-LDR_Sensor/
+PIR_Motion/
 │
 ├── src/
 │   └── main.cpp
@@ -81,76 +79,74 @@ LDR_Sensor/
 # Sample Output
 
 ```
-Analog Value : 2780
-Digital State : LOW
+Motion Detected!
 
-Analog Value : 430
-Digital State : HIGH
+No Motion
+
+Motion Detected!
 ```
 
 ---
 
 # How It Works
 
-1. The LDR changes its resistance according to light intensity.
-2. The sensor module converts resistance changes into voltage.
-3. ESP32 reads:
-   - Analog value using `analogRead()`
-   - Digital state using `digitalRead()`
-4. The measured values are displayed on the Serial Monitor.
+1. The PIR sensor continuously monitors infrared radiation.
+2. A moving human changes the infrared pattern.
+3. The sensor outputs HIGH.
+4. ESP32 reads HIGH using digitalRead().
+5. Motion status is printed to the Serial Monitor.
 
 ---
 
 # Applications
 
-- Automatic Street Lights
-- Smart Lighting Systems
-- Solar Trackers
-- Light Intensity Monitoring
-- IoT Automation
+- Home Security
+- Automatic Lights
+- Smart Door Systems
+- Alarm Systems
+- Occupancy Detection
 - Energy Saving Systems
 
 ---
 
 # Troubleshooting
 
-### Analog Value Doesn't Change
+### Always HIGH
 
-- Verify AO connection.
-- Use an ADC-capable GPIO.
-- Shine a flashlight on the sensor.
+- Wait 30–60 seconds after powering the sensor.
+- Adjust sensitivity and delay potentiometers.
 
-### Digital Output Always HIGH/LOW
+### No Detection
 
-- Adjust the onboard potentiometer.
-- Verify DO wiring.
-
-### Incorrect Readings
-
-- Avoid loose wires.
-- Ensure proper power supply.
-- Check ADC pin configuration.
+- Verify wiring.
+- Ensure the sensor has completed initialization.
+- Check GPIO number.
 
 ---
 
 # Future Improvements
 
-- Display readings on OLED
-- Build automatic night lamp
-- Upload light data to cloud
-- Generate light intensity graphs
-- Integrate with home automation
+- Turn on LED during motion
+- Send notifications over Wi-Fi
+- Trigger camera recording
+- Control relays automatically
 
 ---
 
 # References
 
-- LDR Sensor Module Datasheet
+- HC-SR501 Datasheet
 - ESP32-S3 Documentation
 
 ---
 
+# Repository
 
+**Brain-Swarm-Lab**
+
+Week 2 → PIR Motion Sensor
+
+---
 
 ## Author
 
