@@ -20,7 +20,7 @@ void loop()
   digitalWrite(trig, LOW);
   int duration = pulseIn(Echo, HIGH);
   Serial.print("Distance in CM: ");
-  Serial.println(duration / 58);
+  Serial.println(duration / 58.79);
   Serial.print("Distance in inches: ");
   Serial.println(duration / 148);
 
