@@ -1,16 +1,18 @@
 #include<Arduino.h>
 #include<Servo.h>
-
+#define pwdpin 2
+#define potpin 5
 
 
 Servo servo;
 
 
-
 void setup(){
+  
   Serial.begin(115200);
   Serial.println("The Servo Stated!");
-  servo.attach(2);
+  pinMode(potpin,INPUT);
+  servo.attach(pwdpin);
 }
 
 void loop(){
@@ -21,11 +23,23 @@ servo.write(position);
 delay(20);
 
 }
-for(int position=180;position<=0;position--){
+for(int position=180;position>=0;position--){
 servo.write(position);
 delay(20);
 }
+while(true){
+int value = analogRead(potpin);
+int angle =map(value,0,4095,0,180);
+servo.write(angle);
+Serial.print("Potentiometer: ");
+Serial.print(value);
 
-delay(200);
+Serial.print(" | Servo Angle: ");
+Serial.println(angle);
+
+
+delay(1000);
+
+}
 
 }

@@ -3,21 +3,25 @@
   "author": "Muhammad Tayyab",
   "editor": "wokwi",
   "parts": [
-    { "type": "board-esp32-s3-devkitc-1", "id": "esp", "top": 9.42, "left": -110.63, "attrs": {} },
+    { "type": "board-esp32-s3-devkitc-1", "id": "esp", "top": -9.78, "left": 14.17, "attrs": {} },
     {
       "type": "wokwi-servo",
       "id": "servo1",
-      "top": 122.8,
-      "left": 48,
+      "top": 94,
+      "left": 182.4,
       "attrs": { "hornColor": "#000088" }
-    }
+    },
+    { "type": "wokwi-potentiometer", "id": "pot1", "top": 123.5, "left": -144.2, "attrs": {} }
   ],
   "connections": [
     [ "esp:TX", "$serialMonitor:RX", "", [] ],
     [ "esp:RX", "$serialMonitor:TX", "", [] ],
     [ "servo1:GND", "esp:GND.3", "black", [ "h-38.4", "v9.6" ] ],
     [ "servo1:PWM", "esp:2", "green", [ "h-48", "v-115", "h-19.2" ] ],
-    [ "servo1:V+", "esp:5V", "green", [ "h-57.6", "v9.7", "h0", "v96", "h-124.8", "v-57.6" ]  ]
+    [ "servo1:V+", "esp:5V", "green", [ "h-57.6", "v9.7", "h0", "v96", "h-124.8", "v-57.6" ] ],
+    [ "pot1:VCC", "esp:3V3.1", "red", [ "v28.8", "h85.6", "v-201.6" ] ],
+    [ "pot1:GND", "esp:GND.1", "black", [ "v48", "h9.6", "v-19.2", "h105.6" ] ],
+    [ "pot1:SIG", "esp:5", "green", [ "v38.4", "h76.4", "v-172.8" ] ]
   ],
   "dependencies": {}
 }
