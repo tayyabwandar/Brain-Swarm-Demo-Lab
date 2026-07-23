@@ -31,13 +31,6 @@ while(true){
 int value = analogRead(potpin);
 int angle =map(value,0,4095,0,180);
 servo.write(angle);
-Serial.print("Potentiometer: ");
-Serial.print(value);
-
-Serial.print(" | Servo Angle: ");
-Serial.println(angle);
-
-
 delay(1000);
 
 }
