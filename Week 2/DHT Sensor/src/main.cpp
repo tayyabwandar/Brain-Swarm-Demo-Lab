@@ -1,23 +1,23 @@
 #include<Arduino.h>
-#include<DHT.h>
+#include<DHTesp.h>
 #define DHTTYPE DHT22
 
 #define dhtpin 11
 
 
-DHT dhtSensor(dhtpin,DHTTYPE);
+DHTesp dhtSensor;
 
 
 void setup(){
-  Serial.begin(115200);
-  dhtSensor.begin();
+  Serial.begin(9600);
+  dhtSensor.setup(dhtpin, DHTesp::DHT22); 
   Serial.println("The The Humidity and the Temperature is Sensor is started");
   delay(2000);
 }
 
 void loop(){
-     float humidity = dhtSensor.readHumidity();
-     float Temperature = dhtSensor.readTemperature();
+     float humidity = dhtSensor.getHumidity();
+     float Temperature = dhtSensor.getTemperature();
 
    
      if(isnan(humidity)){

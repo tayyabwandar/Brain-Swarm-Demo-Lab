@@ -4,7 +4,7 @@
 #define digitalPin 5
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
 
   pinMode(analogPin, INPUT);
   pinMode(digitalPin, INPUT);
