@@ -10,8 +10,8 @@ Servo servo;
 
 Adafruit_SH1106G display(128, 64, &Wire, -1);
 
-int freq = 1000;
-
+unsigned long prevoiusMilis =0;
+const unsigned interval = 1000;
 float temperature = 0;
 float Humidity = 0;
 
@@ -27,7 +27,6 @@ void oledSetup()
 void servoSetup()
 {
   servo.attach(41);
-  servo.write(1024);
 };
 void dhtSetup()
 
@@ -89,15 +88,15 @@ void oled()
 void servoFun()
 {
   int JoystickValuesX = analogRead(6);
-  int angle = map(JoystickValuesX, 0, 4095, 0, 180);
+  int angle = map(JoystickValuesX, 0, 4095, 0, 90);
   if(temperature!=25){
-    if (temperature < 25)
+    if (temperature < 25 && Humidity>30)
   {
 
     servo.write(0);
   }
-  if (temperature > 25)
-    servo.write(180);
+  if (temperature > 25 && Humidity<30)
+    servo.write(90);
   }
   else{
     servo.write(angle);
@@ -109,6 +108,15 @@ void servoFun()
 
 void loop()
 {
-  oled();
-  servoFun();
+
+unsigned long currentMilis = millis();
+
+if(currentMilis-prevoiusMilis>interval){
+
+prevoiusMilis=currentMilis;
+oled();
+servoFun();
+
+}
+  
 };
