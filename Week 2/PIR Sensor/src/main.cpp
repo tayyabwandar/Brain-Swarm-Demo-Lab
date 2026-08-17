@@ -4,7 +4,7 @@
 
 void setup(){
 pinMode(4,INPUT_PULLDOWN);
-Serial.begin(115200);
+Serial.begin(9600);
 Serial.println("Sensor Started");
 delay(1000);
 }

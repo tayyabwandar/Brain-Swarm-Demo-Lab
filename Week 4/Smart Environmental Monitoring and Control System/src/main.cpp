@@ -22,6 +22,7 @@ void oledSetup()
 
   display.setTextColor(SH110X_WHITE);
   display.print("Starting");
+  display.display();
   display.clearDisplay();
 };
 void servoSetup()

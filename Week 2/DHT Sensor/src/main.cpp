@@ -1,6 +1,6 @@
 #include<Arduino.h>
 #include<DHTesp.h>
-#define DHTTYPE DHT22
+#define DHTTYPE DHT11
 
 #define dhtpin 11
 
@@ -10,7 +10,7 @@ DHTesp dhtSensor;
 
 void setup(){
   Serial.begin(9600);
-  dhtSensor.setup(dhtpin, DHTesp::DHT22); 
+  dhtSensor.setup(dhtpin, DHTesp::DHT11); 
   Serial.println("The The Humidity and the Temperature is Sensor is started");
   delay(2000);
 }
