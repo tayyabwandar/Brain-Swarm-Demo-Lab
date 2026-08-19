@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "author": "BrainSwarm Demo Lab",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-s3-devkitc-1",
+      "id": "esp",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-pir-motion",
+      "id": "pir",
+      "top": -20,
+      "left": 250,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led",
+      "top": 100,
+      "left": 250,
+      "attrs": {
+        "color": "red"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 100,
+      "left": 180,
+      "attrs": {
+        "value": "220"
+      }
+    }
+  ],
+  "connections": [
+    [
+      "pir:VCC",
+      "esp:5V"
+    ],
+    [
+      "pir:GND",
+      "esp:GND.1"
+    ],
+    [
+      "pir:OUT",
+      "esp:4"
+    ],
+    [
+      "esp:2",
+      "r1:1"
+    ],
+    [
+      "r1:2",
+      "led:A"
+    ],
+    [
+      "led:C",
+      "esp:GND.2"
+    ]
+  ]
+}
