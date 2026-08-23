@@ -3,63 +3,25 @@
   "author": "BrainSwarm Demo Lab",
   "editor": "wokwi",
   "parts": [
-    {
-      "type": "board-esp32-s3-devkitc-1",
-      "id": "esp",
-      "top": 0,
-      "left": 0,
-      "attrs": {}
-    },
-    {
-      "type": "wokwi-pir-motion",
-      "id": "pir",
-      "top": -20,
-      "left": 250,
-      "attrs": {}
-    },
-    {
-      "type": "wokwi-led",
-      "id": "led",
-      "top": 100,
-      "left": 250,
-      "attrs": {
-        "color": "red"
-      }
-    },
+    { "type": "board-esp32-s3-devkitc-1", "id": "esp", "top": -0.18, "left": 4.57, "attrs": {} },
+    { "type": "wokwi-pir-motion", "id": "pir", "top": -20, "left": 250, "attrs": {} },
+    { "type": "wokwi-led", "id": "led", "top": 63.6, "left": 243.8, "attrs": { "color": "red" } },
     {
       "type": "wokwi-resistor",
       "id": "r1",
-      "top": 100,
-      "left": 180,
-      "attrs": {
-        "value": "220"
-      }
-    }
+      "top": 42.35,
+      "left": 153.6,
+      "attrs": { "value": "220" }
+    },
+    { "type": "wokwi-pir-motion-sensor", "id": "pir1", "top": 176.8, "left": 194.22, "attrs": {} }
   ],
   "connections": [
-    [
-      "pir:VCC",
-      "esp:5V"
-    ],
-    [
-      "pir:GND",
-      "esp:GND.1"
-    ],
-    [
-      "pir:OUT",
-      "esp:4"
-    ],
-    [
-      "esp:2",
-      "r1:1"
-    ],
-    [
-      "r1:2",
-      "led:A"
-    ],
-    [
-      "led:C",
-      "esp:GND.2"
-    ]
-  ]
+    [ "r1:1", "esp:1", "green", [ "v0" ] ],
+    [ "r1:2", "led:C", "green", [ "v67.2", "h46.8" ] ],
+    [ "pir1:VCC", "esp:3V3.1", "red", [ "v19.2", "h-259.2", "v-259.2" ] ],
+    [ "pir1:OUT", "esp:2", "green", [ "v28.8", "h-124.94", "v-230.4" ] ],
+    [ "pir1:GND", "esp:GND.4", "black", [ "v38.4", "h-115.46", "v-76.8", "h-38.4" ] ],
+    [ "led:A", "esp:GND.3", "green", [ "v38.4", "h-134.4", "v67.2" ] ]
+  ],
+  "dependencies": {}
 }
