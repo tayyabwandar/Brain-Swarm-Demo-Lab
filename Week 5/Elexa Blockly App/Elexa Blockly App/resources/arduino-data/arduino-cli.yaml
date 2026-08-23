@@ -1,6 +1,0 @@
-board_manager:
-    additional_urls: []
-directories:
-    data: C:\Users\MUGHAL\AppData\Local\Arduino15
-    downloads: C:\Users\MUGHAL\AppData\Local\Arduino15\staging
-    user: C:\Users\MUGHAL\Documents\Arduino
