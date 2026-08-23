@@ -70,38 +70,40 @@ void setup() {
 
 
   
-    server.on("/sensors", HTTP_GET, []() {
+   server.on("/sensors", HTTP_GET, []() {
 
-        float temperature = dht.readTemperature();
-        float humidity = dht.readHumidity();
+    unsigned long requestReceivedTime = millis();
 
-        if (isnan(temperature) || isnan(humidity)) {
+    float temperature = dht.readTemperature();
+    float humidity = dht.readHumidity();
 
-            server.send(
-                500,
-                "application/json",
-                "{\"success\":false\"}"
-            );
+    unsigned long sensorReadCompleteTime = millis();
 
-            return;
-        }
-
-        String json = "{";
-
-        json += "\"temperature\":";
-        json += String(temperature, 1);
-
-        json += ",\"humidity\":";
-        json += String(humidity, 1);
-
-        json += "}";
-
+    if (isnan(temperature) || isnan(humidity)) {
         server.send(
-            200,
+            500,
             "application/json",
-            json
+            "{\"success\":false}"
         );
-    });
+        return;
+    }
+
+    String json = "{";
+    json += "\"success\":true,";
+    json += "\"temperature\":" + String(temperature, 1) + ",";
+    json += "\"humidity\":" + String(humidity, 1) + ",";
+    json += "\"sensor_time\":" + String(sensorReadCompleteTime) + ",";
+    json += "\"processing_time\":" + String(
+        sensorReadCompleteTime - requestReceivedTime
+    );
+    json += "}";
+
+    server.send(
+        200,
+        "application/json",
+        json
+    );
+});
 
 
     server.begin();
