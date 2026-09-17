@@ -17,7 +17,7 @@ DHT dht(DHT_PIN, DHT_TYPE);
 
 void setup() {
 
-    Serial.begin(115200);
+    Serial.begin(9600);
     delay(1000);
 
     pinMode(LED_PIN, OUTPUT);
@@ -28,6 +28,7 @@ void setup() {
     
     WiFi.mode(WIFI_STA);
     WiFi.begin(ssid, password);
+    
 
     Serial.print("Connecting to WiFi");
 
