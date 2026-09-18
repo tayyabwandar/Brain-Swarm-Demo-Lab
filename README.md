@@ -9,6 +9,36 @@ An ESP32 learning portfolio built with the Arduino framework, PlatformIO, and Wo
 3. Start Wokwi when the folder includes diagram.json and wokwi.toml, or upload the firmware to the matching physical circuit.
 4. Open the Serial Monitor at the baud rate used in src/main.cpp.
 
+## Wokwi and PlatformIO configuration
+
+Each Wokwi simulation should contain a platformio.ini file, a wokwi.toml file, and its diagram.json circuit definition. PlatformIO builds the ESP32-S3 firmware; Wokwi then loads the generated firmware and ELF files specified in wokwi.toml.
+
+Create or confirm this PlatformIO configuration in each ESP32-S3 project:
+
+~~~ini
+[env:esp32-s3-devkitc-1]
+platform = espressif32
+board = esp32-s3-devkitc-1
+framework = arduino
+~~~
+
+Create or confirm this Wokwi configuration in a file named wokwi.toml:
+
+~~~toml
+[wokwi]
+version = 1
+firmware = ".pio/build/esp32-s3-devkitc-1/firmware.bin"
+elf = ".pio/build/esp32-s3-devkitc-1/firmware.elf"
+~~~
+
+Before starting Wokwi, build the project so both files exist:
+
+~~~text
+pio run
+~~~
+
+The board name in platformio.ini and the build-folder name in wokwi.toml must match exactly. If another board is selected, update both firmware and ELF paths to that board's build directory.
+
 ## Task catalogue
 
 The **Demo video** column links only to recordings stored in this repository. A dash means a recording has not yet been provided, not that the task has failed.
