@@ -152,3 +152,9 @@ Week 2 → PIR Motion Sensor
 
 **Muhammad Tayyab**
 
+---
+
+## Demo video
+
+[Watch the recorded demonstration](<PIR.mp4>).
+

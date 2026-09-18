@@ -59,3 +59,9 @@ src/main.cpp   # Motion detection and light-control logic
 diagram.json   # Wokwi circuit diagram
 platformio.ini # ESP32-S3 PlatformIO configuration
 ```
+
+---
+
+## Demo video
+
+[Watch the recorded demonstration](<PIR&Light.mp4>).

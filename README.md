@@ -1,360 +1,52 @@
-# Week 1 – ESP32 Basics
-
-Welcome to **Week 1** of the **Brain Swarm Demo Lab**. This week introduces the fundamentals of ESP32 programming using the Arduino framework, PlatformIO, and the Wokwi simulator.
-
-The experiments focus on the basic input/output peripherals and communication interfaces that every embedded systems developer should understand before moving on to advanced topics.
-
----
-
-## 📚 Projects Covered
-
-| Project | Description |
-|---------|-------------|
-| 🖥️ Hello World | Learn how to initialize Serial communication and print messages to the Serial Monitor. |
-| 💡 Blink LED | Learn how to control an external LED using GPIO pins and digital output. |
-| 🔘 Push Button | Read user input using a push button and understand digital input with internal pull-up resistors. |
-| 🌗 PWM LED Dimming | Control LED brightness using Pulse Width Modulation (PWM). |
-| 🎛️ Potentiometer | Read analog voltage using the ESP32's Analog-to-Digital Converter (ADC). |
-| 📺 OLED Display | Interface an SSD1306 OLED display using the I²C communication protocol and display text. |
-
----
-# Week 2 – Sensor Interfacing
-
-Week 2 focuses on interfacing commonly used sensors with the **ESP32-S3**. These projects introduce analog, digital, and I²C-based sensors, providing hands-on experience in acquiring real-world data for embedded systems and IoT applications.
-
----
-
-## 📚 Projects Covered
-
-| Project | Description |
-|---------|-------------|
-| 🌡️ DHT22 | Measure temperature and humidity using a digital sensor. |
-| ⚖️ HX711 Load Cell | Read weight measurements using a load cell amplifier. |
-| 🚶 PIR Motion Sensor | Detect human motion using passive infrared sensing. |
-| ☀️ LDR Sensor | Measure ambient light intensity using analog and digital outputs. |
-| 🎮 Analog Joystick | Read X-axis, Y-axis, and push button inputs. |
-| 📐 MPU6050 | Measure acceleration and angular velocity using a 6-axis IMU over I²C. |
-| 📏 HC-SR04 Ultrasonic | Measure object distance using ultrasonic sound waves. |
-
----
-
-## 🎯 Learning Objectives
-
-By completing Week 2, you will learn how to:
-
-- Interface analog, digital, and I²C sensors
-- Read environmental and motion data
-- Measure distance, light intensity, and weight
-- Acquire accelerometer and gyroscope data
-- Process sensor outputs using the ESP32-S3
-- Debug sensor communication and calibration
-- Build a foundation for robotics and IoT applications
-
----
-
-
-
-## 📂 Folder Structure
-
-```text
-Week 2/
-├── DHT22/
-├── HX711 Load Cell/
-├── PIR Motion Sensor/
-├── LDR Sensor/
-├── Analog Joystick/
-├── MPU6050/
-├── HC-SR04 Ultrasonic/
-└── README.md
-```
-
-E
-
-A collection of common issues and solutions encountered while developing ESP32-S3 projects using **PlatformIO** and **Wokwi**.
-
----
-
-## 📌 Common Issues and Solutions
-
-### 1. Select the Correct Board
-
-When creating a new PlatformIO project, always select the correct board.
-
-For ESP32-S3 projects, use:
-
-```ini
-esp32-s3-devkitc-1
-```
-
-Selecting the wrong board can lead to:
-- Compilation errors
-- Incorrect pin mapping
-- Peripheral incompatibility
-- Simulation failures
-
----
-
-### 2. Add `diagram.json`
-
-If you are using the **Wokwi Community License**, create a file named:
-
-```text
-diagram.json
-```
-
-Copy the JSON configuration from the Wokwi website and paste it into this file.
-
----
-
-### 3. Configure `wokwi.toml`
-
-Create a file named:
-
-```text
-wokwi.toml
-```
-
-Example:
-
-```toml
-[wokwi]
-version = 1
-firmware = ".pio/build/esp32-s3-devkitc-1/firmware.bin"
-elf = ".pio/build/esp32-s3-devkitc-1/firmware.elf"
-```
-
-Ensure the firmware and ELF paths are correct.
-
----
-
-### 4. Verify Firmware and ELF Paths
-
-If the simulation does not start:
-
-- Verify `firmware.bin` exists.
-- Verify `firmware.elf` exists.
-- Ensure both paths match your build directory.
-
----
-
-### 5. Use Forward Slashes (`/`)
-
-When copying file paths from Windows, replace backslashes (`\`) with forward slashes (`/`).
-
-❌ Incorrect
-
-```text
-.pio\build\esp32-s3-devkitc-1\firmware.bin
-```
-
-✅ Correct
-
-```text
-.pio/build/esp32-s3-devkitc-1/firmware.bin
-```
-
----
-
-### 6. Check `platformio.ini`
-
-Ensure the board matches the one selected when creating the project.
-
-```ini
-[env:esp32-s3-devkitc-1]
-platform = espressif32
-board = esp32-s3-devkitc-1
-framework = arduino
-```
-
----
-
-### 7. Install Required Libraries
-
-If your project uses external libraries, include them in `platformio.ini`.
-
-```ini
-lib_deps =
-    adafruit/Adafruit GFX Library@^1.12.6
-    adafruit/Adafruit SSD1306@^2.5.17
-```
-
-Missing libraries will cause compilation errors.
-
----
-
-### 8. Use `INPUT_PULLUP` for Push Buttons
-
-Instead of:
-
-```cpp
-pinMode(buttonPin, INPUT);
-```
-
-Use:
-
-```cpp
-pinMode(buttonPin, INPUT_PULLUP);
-```
-
-This prevents floating inputs and removes the need for an external pull-up resistor in most cases.
-
----
-
-### 9. Use Hardware PWM
-
-Do **not** use:
-
-```cpp
-analogWrite(pin, value);
-```
-
-Instead, use the ESP32 LEDC hardware PWM API.
-
----
-
-### 10. Configure PWM Correctly
-
-Always configure the PWM channel before attaching it to a pin.
-
-```cpp
-ledcSetup(channel, frequency, resolution);
-ledcAttachPin(pin, channel);
-ledcWrite(channel, dutyCycle);
-```
-
-Do **not** call `ledcAttachPin()` before `ledcSetup()`.
-
----
-
-### 11. Initialize Serial Communication
-
-If using the Serial Monitor, always initialize Serial.
-
-```cpp
-Serial.begin(115200);
-```
-
-Make sure the Serial Monitor uses the same baud rate.
-
----
-
-## ✅ Troubleshooting Checklist
-
-- ✅ Selected the correct board (`esp32-s3-devkitc-1`)
-- ✅ Added `diagram.json`
-- ✅ Created `wokwi.toml`
-- ✅ Verified firmware and ELF paths
-- ✅ Used forward slashes (`/`) in file paths
-- ✅ Checked `platformio.ini`
-- ✅ Installed required libraries
-- ✅ Used `INPUT_PULLUP` for push buttons
-- ✅ Used hardware PWM instead of `analogWrite()`
-- ✅ Called `ledcSetup()` before `ledcAttachPin()`
-- ✅ Initialized Serial using `Serial.begin(115200)`
-
----
-
-## 🤝 Contributing
-
-Found another common issue? Feel free to open an issue or submit a pull request to help improve this guide.
-
-## 🎯 Learning Objectives
-
-By completing these projects, you will learn how to:
-
-- Set up ESP32 projects using PlatformIO
-- Simulate hardware using Wokwi
-- Use the Serial Monitor for debugging
-- Configure GPIO pins as inputs and outputs
-- Control LEDs using digital signals
-- Read button states using `digitalRead()`
-- Generate PWM signals to control LED brightness
-- Read analog values using the ESP32 ADC
-- Communicate with peripherals using the I²C protocol
-- Display text on an OLED screen
-
----
-
-## 🛠 Software Used
-
-- Visual Studio Code
-- PlatformIO IDE
-- Wokwi Simulator
-- Arduino Framework
-
----
-
-## 📂 Folder Structure
-
-```
-Week 1/
-├── ESP32 Hello World/
-├── ESP32 Blink LED/
-├── ESP32 PushButton/
-├── ESP32 PWM LED Dimming/
-├── ESP32 Potentiometer/
-├── ESP32 OLED Display/
-└── README.md
-```
-
-Each project contains:
-
-- Source code (`src/main.cpp`)
-- Circuit diagram (`diagram.json`)
-- PlatformIO configuration (`platformio.ini`)
-- Wokwi configuration (`wokwi.toml`)
-- Project documentation (`README.md`)
-- Images showing the circuit and simulation output
-
----
-
-## 🚀 Getting Started
-
-1. Clone the repository.
-
-```bash
-git clone https://github.com/tayyabwandar/Brain-Swarm-Demo-Lab.git
-```
-
-2. Open the project in **Visual Studio Code**.
-
-3. Install the following extensions:
-
-- PlatformIO IDE
-- Wokwi Simulator
-
-4. Open any project inside the **Week 1** folder.
-
-5. Build and run the simulation.
-
----
-
-## 📖 Prerequisites
-
-Basic knowledge of:
-
-- C/C++ Programming
-- Variables and Functions
-- Arduino Programming (recommended but not required)
-
----
-
-## 📌 Week 1 Summary
-
-During Week 1, you built a strong foundation in ESP32 programming by learning:
-
-- Serial Communication
-- GPIO Programming
-- Digital Input and Output
-- Analog Input (ADC)
-- Pulse Width Modulation (PWM)
-- I²C Communication
-- OLED Display Interfacing
-
-These concepts form the building blocks for future projects involving sensors, actuators, IoT, robotics, and embedded systems.
-
----
-
-## 👨‍💻 Author
-
-**Muhammad Tayyab**  
+# Brain Swarm Demo Lab
+
+An ESP32 learning portfolio built with the Arduino framework, PlatformIO, and Wokwi. Each task is self-contained: its folder holds the source code, PlatformIO configuration, and, where available, a Wokwi circuit diagram and recorded demonstration.
+
+## Run a project
+
+1. Open one task folder in VS Code with PlatformIO installed.
+2. Build the project for the board configured in platformio.ini; most tasks use ESP32-S3 DevKitC-1.
+3. Start Wokwi when the folder includes diagram.json and wokwi.toml, or upload the firmware to the matching physical circuit.
+4. Open the Serial Monitor at the baud rate used in src/main.cpp.
+
+## Task catalogue
+
+The **Demo video** column links only to recordings stored in this repository. A dash means a recording has not yet been provided, not that the task has failed.
+
+| Week | Task | What it demonstrates | Documentation | Demo video |
+| --- | --- | --- | --- | --- |
+| 1 | ESP32 Hello World | Sends a repeating message over the serial connection. | [README](<Week 1/Week1 Simulations/ESP32 Hello World/readme.md>) | — |
+| 1 | Blink LED | Drives an LED on GPIO 2 in a one-second on/off loop. | [README](<Week 1/Week1 Simulations/ESP32 Bink LED/Blink LED/readme.md>) | [Watch](<Week 1/Week1 Simulations/ESP32 Bink LED/Blink LED/BlinkLed.mp4>) |
+| 1 | Push Button | Reads a pull-up button and reports its state through Serial. | [README](<Week 1/Week1 Simulations/ESP32 PushButton/ESP32 PushButton/readme.md>) | [Watch](<Week 1/Week1 Simulations/ESP32 PushButton/ESP32 PushButton/pushButton.mp4>) |
+| 1 | PWM LED Dimming | Fades an LED by changing the ESP32 LEDC PWM duty cycle. | [README](<Week 1/Week1 Simulations/ESP32 PWM LED Dimming/ESP32 PWM LED Dimming/readme.md>) | [Watch](<Week 1/Week1 Simulations/ESP32 PWM LED Dimming/ESP32 PWM LED Dimming/PWM.mp4>) |
+| 1 | Potentiometer | Samples an analog voltage and prints the ADC value. | [README](<Week 1/Week1 Simulations/ESP32 Potentiometer/Esp32 Potentiometer/readme.md>) | — |
+| 1 | OLED Display | Initializes an SH1106 OLED over I²C and displays a lab message. | [README](<Week 1/Week1 Simulations/ESP32 OLED Display/ESP32 OLED Display/readme.md>) | [Watch](<Week 1/Week1 Simulations/ESP32 OLED Display/ESP32 OLED Display/Oled.mp4>) |
+| 2 | Cap Touch Sensor | Reads a digital input and reports the observed state. | [README](<Week 2/Cap TouchSensor/readme.md>) | [Watch](<Week 2/Cap TouchSensor/Cap_touch.mp4>) |
+| 2 | DHT Sensor | Reads temperature and humidity from a DHT11. | [README](<Week 2/DHT Sensor/readme.md>) | — |
+| 2 | HX711 Load Cell | Tares a load cell and reports calibrated weight. | [README](<Week 2/HX711 Load Cell/readme.md>) | — |
+| 2 | Joystick | Reads the joystick X/Y analog channels and switch. | [README](<Week 2/JOY Stick/readme.md>) | — |
+| 2 | LDR Sensor | Reports analog light level and digital bright/dark threshold. | [README](<Week 2/LDR Sensor/readme.md>) | [Watch](<Week 2/LDR Sensor/LDR.mp4>) |
+| 2 | MPU6050 | Obtains acceleration, angular-rate, and temperature data over I²C. | [README](<Week 2/MPU Sensor/readme.md>) | — |
+| 2 | PIR Sensor | Detects motion through a digital PIR output. | [README](<Week 2/PIR Sensor/readme.md>) | [Watch](<Week 2/PIR Sensor/PIR.mp4>) |
+| 2 | Ultrasonic Distance Sensor | Converts HC-SR04 echo timing into centimetres and inches. | [README](<Week 2/UltraSonic Distance Sensor/readme.md>) | — |
+| 3 | Interactive OLED | Displays DHT22 temperature and humidity readings on an SSD1306 OLED. | [README](<Week 3/Interactive OLED/readme.md>) | [Watch](<Week 3/Interactive OLED/WeatherSat.mp4>) |
+| 3 | Joystick-Controlled Servo | Maps a joystick analog value to a servo angle. | [README](<Week 3/Joystick controlled servo/readme.md>) | — |
+| 3 | Servo Sweep and Position Control | Sweeps a servo, then takes its position from a potentiometer. | [README](<Week 3/Servo Sweep and Position Control/readme.md>) | — |
+| 3 | Traffic Light Controller | Runs timed red, yellow, and green LED states. | [README](<Week 3/Traffic Light Controller/readme.md>) | [Watch](<Week 3/Traffic Light Controller/traffic_lights.mp4>) |
+| 4 | Smart Environmental Monitoring and Control | Shows DHT22 readings on OLED and adjusts a servo from the environment/joystick. | [README](<Week 4/Smart Environmental Monitoring and Control System/readme.md>) | — |
+| 5 | Blockly App Exploration | Documents the Blockly ESP32 app’s serial-port loading issue and recommended checks. | [README](<Week 5/readme.md>) | — |
+| 6 | PIR Motion-Triggered Smart Light | Turns the light on after motion and off after ten seconds without it. | [README](<Week 6/PIR Motion-Triggered Smart Light/readme.md>) | [Watch](<Week 6/PIR Motion-Triggered Smart Light/PIR&Light.mp4>) |
+| 6 | Smart Weather Station | Shows DHT22 temperature and humidity on an SSD1306 OLED. | [README](<Week 6/Smart Weather Station/readme.md>) | [Watch](<Week 6/Smart Weather Station/WhatsApp Video 2026-09-18 at 8.32.29 AM.mp4>) |
+| 7 | Application Controlled LED | Provides HTTP endpoints for LED control and DHT11 sensor readings. | [README](<Week 7/Application Controlled LED/readme.md>) | [Watch](<Week 7/Application Controlled LED/WhatsApp Video 2026-09-17 at 6.20.48 AM.mp4>) |
+
+## Repository layout
+
+- **src/main.cpp** — the Arduino application for the task.
+- **platformio.ini** — PlatformIO board, framework, and library configuration.
+- **diagram.json** — Wokwi circuit definition, when the task has a simulator setup.
+- **wokwi.toml** — Wokwi firmware and ELF paths.
+- **readme.md** — task explanation, expected behaviour, and a demo-video link when one is available.
+
+## Video coverage
+
+Recorded task videos are included for Blink LED, Push Button, PWM LED Dimming, OLED Display, Cap Touch Sensor, LDR Sensor, PIR Sensor, Interactive OLED, Traffic Light Controller, PIR Motion-Triggered Smart Light, Smart Weather Station, and Application Controlled LED. Recordings for the other catalogue entries are not currently present in the repository.

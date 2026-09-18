@@ -72,3 +72,9 @@ src/main.cpp   # Sensor reading, OLED display, and serial output
 diagram.json   # Wokwi circuit diagram
 platformio.ini # ESP32-S3 configuration and library dependencies
 ```
+
+---
+
+## Demo video
+
+[Watch the recorded demonstration](<WhatsApp Video 2026-09-18 at 8.32.29 AM.mp4>).

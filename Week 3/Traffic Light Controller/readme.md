@@ -240,3 +240,9 @@ Each demo is simulated and tested in **Wokwi** before moving to the next hardwar
 ## Author
 
 **Muhammad Tayyab**
+
+---
+
+## Demo video
+
+[Watch the recorded demonstration](<traffic_lights.mp4>).

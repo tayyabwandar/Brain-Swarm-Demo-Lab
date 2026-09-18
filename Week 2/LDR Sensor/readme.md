@@ -158,3 +158,9 @@ Digital State : HIGH
 
 **Muhammad Tayyab**
 
+---
+
+## Demo video
+
+[Watch the recorded demonstration](<LDR.mp4>).
+

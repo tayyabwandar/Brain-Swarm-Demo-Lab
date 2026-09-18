@@ -149,4 +149,10 @@ After completing this project, you will understand:
 
 ## Author
 
-**Muhammad Tayyab**  
+**Muhammad Tayyab**
+
+---
+
+## Demo video
+
+[Watch the recorded demonstration](<Oled.mp4>).
